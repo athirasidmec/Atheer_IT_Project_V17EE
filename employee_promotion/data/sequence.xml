@@ -1,0 +1,8 @@
+<odoo>
+    <record id="seq_hr_promotion" model="ir.sequence">
+        <field name="name">HR Promotion Sequence</field>
+        <field name="code">hr.promotion</field>
+        <field name="padding">5</field>
+        <field name="prefix"></field>
+    </record>
+</odoo>
