@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <record id="hr_promotion_view_form" model="ir.ui.view">
+        <field name="name">hr.promotion.view.form</field>
+        <field name="model">hr.promotion</field>
+        <field name="arch" type="xml">
+            <form>
+                <header>
+                    <button name="action_submit" type="object" string="Submit" class="btn-primary" groups="employee_promotion.group_employee_administrator"/>
+                    <button name="action_approve" type="object" string="Confirm Order" class="btn-primary"/>
+                    <button name="action_create_invoice" type="object" string="Create Invoice" class="btn-primary"/>
+                    <button name="action_cancel" type="object" string="Cancel" class="btn-primary" groups="employee_promotion.group_employee_administrator"/>
+                    <field name="state" widget="statusbar" statusbar_visible="draft,hr,confirmed,cancelled"/>
+                </header>
+                <sheet>
+                    <h1><field name="name"/></h1>
+                    <group>
+                        <group>
+                            <field name="employee_id"/>
+                            <field name="grade"/>
+                            <field name="promoted_grade"/>
+                        </group>
+                        <group>
+                            <field name="effective_date"/>
+                            <field name="current_salary" widget="monetary" options="{'currency_field': 'currency_id'}"/>
+                            <field name="promoted_salary" widget="monetary" options="{'currency_field': 'currency_id'}"/>
+                        </group>
+                    </group>
+                    <notebook>
+                        <page string="Promotion Lines">
+                            <field name="promotion_line_ids">
+                                <tree editable="bottom">
+                                    <field name="salary_rule_id"/>
+                                    <field name="current_amount" widget="monetary"/>
+                                    <field name="new_amount" widget="monetary"/>
+                                </tree>
+                            </field>
+                        </page>
+                    </notebook>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <record id="hr_promotion_view_tree" model="ir.ui.view">
+        <field name="name">hr.promotion.view.tree</field>
+        <field name="model">hr.promotion</field>
+        <field name="arch" type="xml">
+            <tree>
+                <field name="name"/>
+                <field name="employee_id"/>
+                <field name="effective_date"/>
+                <field name="current_salary"/>
+                <field name="grade"/>
+            </tree>
+        </field>
+    </record>
+
+    <record id="action_hr_promotion" model="ir.actions.act_window">
+        <field name="name">HR Promotion</field>
+        <field name="res_model">hr.promotion</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+
+    <menuitem id="menu_employee_promotion"
+              name="Employee Promotion"
+              web_icon="employee_promotion,static/description/promotion.png"
+              sequence="100"/>
+
+    <menuitem id="menu_hr_promotion"
+              name="HR Promotion"
+              parent="menu_employee_promotion"
+              action="action_hr_promotion"
+              sequence="2"/>
+</odoo>
