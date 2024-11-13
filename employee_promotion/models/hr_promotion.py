@@ -82,15 +82,3 @@ class HrPromotionLines(models.Model):
                 line.current_amount = contract.wage * line.salary_rule_id.amount_percentage / 100
             else:
                 line.current_amount = 0.0
-
-    # @api.depends('salary_rule_id', 'promotion_id.promoted_grade')
-    # def _compute_new_amount(self):
-    #     for line in self:
-    #         if line.salary_rule_id and line.promotion_id.promoted_grade:
-    #             grade_salary = line.promotion_id.promoted_grade.salary_rule_ids.filtered(lambda r: r.category_id.name == line.salary_rule_id.name)
-    #             if grade_salary:
-    #                 line.new_amount = grade_salary[0].amount * line.salary_rule_id.amount_percentage / 100
-    #             else:
-    #                 line.new_amount = 0.0
-    #         else:
-    #             line.new_amount = 0.0
