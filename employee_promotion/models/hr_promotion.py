@@ -20,7 +20,7 @@ class HrPromotion(models.Model):
     promotion_line_ids = fields.One2many("hr.promotion.line", "promotion_id")
     state = fields.Selection(
         [('draft', 'Draft'),('hr', 'HR'),('confirmed', 'Confirmed'),('cancelled', 'Cancelled')
-        ],tring="Status",readonly=True,default='draft')
+        ],string="Status", readonly=True, default='draft')
 
     @api.model
     def create(self, vals):
